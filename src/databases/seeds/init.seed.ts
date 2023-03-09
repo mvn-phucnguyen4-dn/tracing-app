@@ -8,6 +8,7 @@ export default class InitialDatabaseSeed implements Seeder {
   public async run(factory: Factory): Promise<void> {
     const people: Person[] = await factory(Person)().createMany(200);
     const locations: Location[] = await factory(Location)().createMany(50);
+    console.log('seed location, people');
 
     const locationTracings: LocationsTracing[] = await factory(
       LocationsTracing,
@@ -22,7 +23,7 @@ export default class InitialDatabaseSeed implements Seeder {
         return locationTracing;
       })
       .createMany(100);
-
+    console.log('seed location tracing');
     const peopleTracings: PeopleTracing[] = await factory(PeopleTracing)()
       .map(async (peopleTracing) => {
         const personIdFirst = faker.helpers.arrayElement(
@@ -39,5 +40,6 @@ export default class InitialDatabaseSeed implements Seeder {
         return peopleTracing;
       })
       .createMany(100);
+    console.log('seed people tracing');
   }
 }

@@ -12,6 +12,6 @@ define(Person, () => {
     'Red',
   ]);
   person.mobile = faker.phone.number('###-###-###');
-  person.statusUpdateDate = faker.date.between('2023-01-01T00:00:00.000Z', '2030-03-01T00:00:00.000Z');
+  person.statusUpdateDate = faker.date.between('2022-10-01T00:00:00.000Z', Date.now());
   return person;
 });

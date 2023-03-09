@@ -5,7 +5,7 @@ import { Location } from '../../models/locations/entities';
 define(Location, () => {
   const location = new Location();
   location.name = faker.address.cityName();
-  location.address = faker.address.streetAddress();                                              
+  location.address = faker.address.streetAddress();
   location.status = faker.helpers.arrayElement([
     'Green',
     'Yellow',
@@ -14,8 +14,8 @@ define(Location, () => {
   ]);
   location.pincode = faker.address.countryCode();
   location.statusUpdateDate = faker.date.between(
-    '2023-01-01T00:00:00.000Z',
-    '2030-03-01T00:00:00.000Z',
+    '2022-10-01T00:00:00.000Z',
+    Date.now(),
   );
   return location;
 });

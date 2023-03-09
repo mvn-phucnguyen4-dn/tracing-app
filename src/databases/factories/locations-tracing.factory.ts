@@ -4,6 +4,9 @@ import { LocationsTracing } from '../../models/locaitons-tracing/entities';
 
 define(LocationsTracing, () => {
   const locationsTracing = new LocationsTracing();
-  locationsTracing.visitDate = faker.date.between('2023-01-01T00:00:00.000Z', '2030-03-01T00:00:00.000Z');
+  locationsTracing.visitDate = faker.date.between(
+    '2022-10-01T00:00:00.000Z',
+    Date.now(),
+  );
   return locationsTracing;
 });
