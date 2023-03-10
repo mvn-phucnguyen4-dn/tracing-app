@@ -19,4 +19,10 @@ export class PersonDTO {
 
   @Expose()
   locationId: string;
+
+  @Expose()
+  createdAt: Date;
+
+  @Expose()
+  updateAt: Date;
 }

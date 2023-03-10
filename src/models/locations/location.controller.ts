@@ -9,4 +9,14 @@ export class LocationController {
   getAll() {
     return this.locationService.getAll();
   }
+
+  @Get('/yesterday-created')
+  getYesterdayCreated() {
+    return this.locationService.getLatestCreated();
+  }
+
+  @Get('/yesterday-updated')
+  getYesterdayUpdated() {
+    return this.locationService.getLatestUpdated();
+  }
 }
