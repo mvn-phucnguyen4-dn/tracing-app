@@ -23,7 +23,8 @@
     "migration:generate": "typeorm-ts-node-commonjs migration:generate -d ./src/shared/data-source.config.ts ./src/databases/migrations/$npm_config_name$",
     "migration:create": "typeorm migration:create ./src/databases/migrations/migrate",
     "migration:revert": "typeorm-ts-node-commonjs -d ./src/shared/data-source.config.ts migration:revert",
-    "db:seed": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n ./src/shared/orm.config.ts"
+    "db:seed": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n ./src/shared/orm.config.ts",
+    "db:seed-daily": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n ./src/shared/orm.config.ts -s DailyDatabaseSeed"
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
