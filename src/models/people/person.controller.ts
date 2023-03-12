@@ -64,4 +64,22 @@ export class PersonController {
       );
     }
   }
+
+  @Get('/update-health-status')
+  updateHealthStatus() {
+    try {
+      return this.personService.generateUpdateHealthStatus();
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: 'Not found',
+        },
+        HttpStatus.FORBIDDEN,
+        {
+          cause: error,
+        },
+      );
+    }
+  }
 }
