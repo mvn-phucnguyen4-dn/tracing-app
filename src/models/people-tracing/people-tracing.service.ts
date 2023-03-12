@@ -3,9 +3,16 @@ import { PeopleTracingRepository } from './repositories/people-tracing.repositor
 import { PeopleTracingDTO } from './dto';
 import { plainToClass } from 'class-transformer';
 import { Between } from 'typeorm';
+import { PersonRepository } from '../people/repositories';
+import { PeopleTracing } from './entities';
+import { faker } from '@faker-js/faker';
+
 @Injectable()
 export class PeopleTracingService {
-  constructor(private peopleTracingRepository: PeopleTracingRepository) {}
+  constructor(
+    private peopleTracingRepository: PeopleTracingRepository,
+    private personRepository: PersonRepository,
+  ) {}
 
   async getAll(): Promise<PeopleTracingDTO[]> {
     const peopleTraces = await this.peopleTracingRepository.find({});
@@ -40,6 +47,34 @@ export class PeopleTracingService {
       .getMany();
 
     return plainToClass(PeopleTracingDTO, peopleTraces, {
+      excludeExtraneousValues: true,
+    });
+  }
+
+  async generatePeopleTracesByDaily(): Promise<PeopleTracingDTO[]> {
+    const people = await this.personRepository.find({});
+
+    const peopleTraces: PeopleTracing[] = [];
+    const now: Date = new Date(Date.now());
+    for (let i = 0; i < 50; i++) {
+      const personIdFirst = faker.helpers.arrayElement(
+        people.map((person) => person.id),
+      );
+      const personIdSecond = faker.helpers.arrayElement(
+        people.map((person) => person.id).filter(id => id != personIdFirst),
+      );
+      const peopleTracing = this.peopleTracingRepository.create({
+        personIdFirst: personIdFirst,
+        personIdSecond: personIdSecond,
+        contactType: 'Other',
+        statusUpdateDate: now
+      });
+      peopleTraces.push(peopleTracing);
+    }
+    const response: PeopleTracing[] = await this.peopleTracingRepository.save(
+      peopleTraces,
+    );
+    return plainToClass(PeopleTracingDTO, response, {
       excludeExtraneousValues: true,
     });
   }

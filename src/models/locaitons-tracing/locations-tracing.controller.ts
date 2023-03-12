@@ -45,4 +45,22 @@ export class LocationsTracingController {
       );
     }
   }
+
+  @Get('/generate')
+  generateLocationTracesByDaily() {
+    try {
+      return this.locationsTracingService.generateLocationTracesByDaily();
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: 'Not found',
+        },
+        HttpStatus.FORBIDDEN,
+        {
+          cause: error,
+        },
+      );
+    }
+  }
 }

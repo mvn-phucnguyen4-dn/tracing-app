@@ -7,7 +7,7 @@ import { Location } from '../../models/locations/entities';
 export default class DailyDatabaseSeed implements Seeder {
   public async run(factory: Factory): Promise<void> {
     const people: Person[] = await factory(Person)().createMany(20);
-    const locations: Location[] = await factory(Location)().createMany(10);
+    const locations: Location[] = await factory(Location)().createMany(50);
     console.log('seed daily location, people');
 
     const locationTracings: LocationsTracing[] = await factory(
